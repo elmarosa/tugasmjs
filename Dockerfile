@@ -1,6 +1,6 @@
 FROM node:14-alpine
 
-WORKDIR /home/abu/mjs/tugasmjs
+WORKDIR /home/abu/tugasmjs
 
 COPY package*.json ./
 
