@@ -3,64 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Pengunjung</title>
+    <title>Halaman Saya</title>
     <style>
-        table {
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: linear-gradient(to right, #3494E6, #EC6EAD);
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        nav {
+            background-color: #fff;
+            padding: 20px;
             width: 100%;
-            border-collapse: collapse;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        th, td {
-            border: 1px solid black;
+        nav a {
+            color: #3494E6;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1em;
+            color: #fff;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        input[type="text"] {
             padding: 8px;
-            text-align: left;
+            border: none;
+            border-radius: 4px;
         }
 
-        th {
-            background-color: #f2f2f2;
+        button {
+            background-color: #3494E6;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <h2>Data Buku</h2>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Nomor</th>
-            <th>Nama Buku</th>
-            <th>Nama Penulis</th>
-            <th>Penerbit</th>
-        </tr>
-        <?php
-        $host = "localhost";
-        $user = "root";
-        $pass = "";
-        $db = "connect";
 
-        $koneksi = mysqli_connect($host, $user, $pass, $db);
-        if (!$koneksi) {
-            die("Tidak bisa terkoneksi ke database");
-        }
+<nav>
+    <a href="#">Beranda</a>
+    <a href="#">Tentang</a>
+    <a href="#">Kontak</a>
+    <input type="text" placeholder="Cari...">
+    <button>Cari</button>
+</nav>
 
-        $sql = "SELECT * FROM tb_buku";
-        $result = mysqli_query($koneksi, $sql);
+<h1>Tugas Mata Kuliah Manajemen Jaringan dan Server</h1>
+<p>
+    Tugas ini adalah salah satu tugas mata kuliah manajemen jaringan dan server yang dikerjakan oleh dua orang mahasiswa, yaitu Elma Rosa dan Dwita Putri, yang merupakan mahasiswa program studi Teknologi Informasi angkatan 2022. Kami berdua bergabung di kelas manajemen jaringan dan server kelas C dan ini adalah tugas terakhir kami. Tugas ini melibatkan pemahaman konsep jaringan, konfigurasi server, serta penerapan keamanan dalam suatu sistem.
+</p>
 
-        if (mysqli_num_rows($result) > 0) {
-            while($row = mysqli_fetch_assoc($result)) {
-                echo "<tr>
-                        <td>".$row["id"]."</td>
-                        <td>".$row["nomor"]."</td>
-                        <td>".$row["nama_buku"]."</td>
-                        <td>".$row["penulis_buku"]."</td>
-                        <td>".$row["penerbit"]."</td>
-                      </tr>";
-            }
-        } else {
-            echo "<tr><td colspan='5'>Tidak ada data</td></tr>";
-        }
-
-        mysqli_close($koneksi);
-        ?>
-    </table>
 </body>
 </html>
