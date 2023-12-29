@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Pengunjung</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Data Buku</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nomor</th>
+            <th>Nama Buku</th>
+            <th>Nama Penulis</th>
+            <th>Penerbit</th>
+        </tr>
+        <?php
+        $host = "localhost";
+        $user = "root";
+        $pass = "";
+        $db = "connect";
+
+        $koneksi = mysqli_connect($host, $user, $pass, $db);
+        if (!$koneksi) {
+            die("Tidak bisa terkoneksi ke database");
+        }
+
+        $sql = "SELECT * FROM tb_buku";
+        $result = mysqli_query($koneksi, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>
+                        <td>".$row["id"]."</td>
+                        <td>".$row["nomor"]."</td>
+                        <td>".$row["nama_buku"]."</td>
+                        <td>".$row["penulis_buku"]."</td>
+                        <td>".$row["penerbit"]."</td>
+                      </tr>";
+            }
+        } else {
+            echo "<tr><td colspan='5'>Tidak ada data</td></tr>";
+        }
+
+        mysqli_close($koneksi);
+        ?>
+    </table>
+</body>
+</html>
